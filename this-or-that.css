@@ -1,0 +1,45 @@
+/* CSS declarations go here */
+
+
+
+ul  {
+	
+	 -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    -webkit-column-gap: 40px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 40px; /* Firefox */
+    column-gap: 40px;
+	
+}
+
+li {  padding-bottom: 20px;}
+
+table { width: 100%;}
+
+
+td {width: 810px;}
+
+.site_preview {width: 50%;}
+
+
+
+.live-example {
+	width: 1600px; 
+    height: 500px !important;
+    overflow: hidden;
+}
+.link-preview {
+    width: 1028px;
+    height: 800px;
+    border: none;
+    pointer-events: none;
+    -webkit-transform: scale(0.2);
+    -moz-transform: scale(0.2);
+    -ms-transform: scale(0.2);
+    transform: scale(.9);
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+}

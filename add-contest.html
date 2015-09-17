@@ -1,0 +1,37 @@
+<head>
+  <title>Add a Contest</title>
+</head>
+
+
+
+<template name="addcontest">
+{{#if currentUser}}
+
+<body> <h1> Add a contest! </h1>
+Make sure you include the full URL (http://mysite.com)
+
+
+  
+  <div class="container">
+  
+<form class="new-contest">
+		<input type="text" name="site1" placeholder="link to first site" />
+		
+		<input type="text" name="site2" placeholder="link to second site" />
+		
+		<input type="submit" value="Add Contest">
+		
+		</form>
+	
+  </div>
+  
+</body>
+
+{{/if}}
+
+{{#unless currentUser}}
+<h3> You need to sign up or login to add contests! </h3>
+{{/unless}}
+
+
+</template>
