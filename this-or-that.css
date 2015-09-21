@@ -13,33 +13,35 @@ ul  {
 	
 }
 
-li {  padding-bottom: 20px;}
-
-table { width: 100%;}
-
-
-td {width: 810px;}
-
-.site_preview {width: 50%;}
 
 
 
-.live-example {
-	width: 1600px; 
-    height: 500px !important;
-    overflow: hidden;
+.entry {
+
+    
+   
+
 }
+
 .link-preview {
-    width: 1028px;
-    height: 800px;
+   /* width: 1028px;
+    height: 800px; */
+   
+    margin: 0 auto;
+    display: inline-block;
+
+   
     border: none;
     pointer-events: none;
     -webkit-transform: scale(0.2);
     -moz-transform: scale(0.2);
     -ms-transform: scale(0.2);
-    transform: scale(.9);
+    transform: scale(1.9);
     -webkit-transform-origin: 0 0;
     -moz-transform-origin: 0 0;
     -ms-transform-origin: 0 0;
     transform-origin: 0 0;
 }
+
+
+.button-clear { clear: left;}
