@@ -14,12 +14,7 @@
 
 <template name="contests">
  <h1>Website Comparisons</h1>
-  <div class="live-example">
   
-    <!-- ko if: showPreview -->
-    <iframe class="link-preview" src="http://ethandrower.com" sandbox='' scrolling="no"></iframe>
-    <!-- /ko -->
-</div>
 
   <div class="container">
 <a href="/addcontest">Add a new contest here</a>
@@ -48,8 +43,8 @@
 
 
 <tr>
-	<td> <span class="vote1"> Vote #1 ({{vote1_count}})</span> </td>
-	<td> <span class="vote2"> Vote #2  ({{vote2_count}})</span>  </td>
+	<td>  <button type="submit" class="vote1">Vote #1 ({{vote1_count}})</button> </td>
+	<td> <button type="submit" class="vote2"> Vote #2  ({{vote2_count}})</button> </td>
 </tr>
 
 
