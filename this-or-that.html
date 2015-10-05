@@ -10,7 +10,15 @@
   
 </body>
 
+<template name="allImages">
 
+{{#each images}}
+
+<a href="{{this.url}}"> image link </a>
+<img src="{{this.url}}">
+{{/each}}
+
+</template>
 
 <template name="contests">
  <h1>Website Comparisons</h1>
@@ -20,8 +28,7 @@
   <div class="container">
 <a href="/addcontest">Add a new contest here</a>
 
-
-
+{{> allImages}}
 
   
 	{{#each contests}}

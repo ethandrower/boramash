@@ -10,3 +10,6 @@ insecure
 iron:router
 accounts-ui
 accounts-password
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
