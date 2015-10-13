@@ -5,13 +5,17 @@ UserAccounts = new Mongo.Collection('Users');
 
 //ImageStore = new FS.Store.GridFS("images");
 ImageStore = new FS.Store.FileSystem("images", {
+
+// don't work **  ImageStore = new FS.Store.FileSystem("../../../public/images", {
 	
+//	ImageStore = new FS.Store.FileSystem("/User/user/testImages", {
 });
 
 
 Images = new FS.Collection("images", {
 
 	stores: [ImageStore]
+	//stores: [new FS.Store.FileSystem("images2", {path: "~/public/images"})]
 
 
 });
@@ -56,14 +60,16 @@ Template.contests.helpers({
 	 
  });
  
- Template.allImages.helpers({
+ 
+ /* Template.allImages.helpers({
 
  	images: function() {
  		return Images.find();
  	}
- });
+ });  */
+
   
-/*
+/*   Don't need
  Template.addcontest.events({
 	 "submit" : function(event) {
 		 event.preventDefault();
@@ -109,17 +115,13 @@ Template.contests.helpers({
 	 	"submit form" : function(event, template){
 	 		 event.preventDefault(); 
 	 		var firstImage = true;
-	 		//var contestId = Random.id(5);
-	 		var contestId = '123';
-
+	 		var contestId = Random.id(5);
+	 		
 	 		var curUser = Meteor.userId();
 	 		console.log("in func");
 	 		
 	 		console.log(event);
 
-	 		//var file = event.target.event1.file;  noo
-	 		// var file = event.target.event1.data; no
-	 		//var file = event.target.event1.value; no
 	 		 var file = template.findAll('input:file');
 
 	 		console.log(file);
@@ -153,7 +155,8 @@ Template.contests.helpers({
 	 				if(firstImage)
 	 				{
 	 					var event1 = event.target.event1.value;
-						var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+						//var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
 						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser}}, {upsert: true}  );
@@ -164,11 +167,14 @@ Template.contests.helpers({
 	 				{
 	 					console.log("in else clause so second image");
 	 					var event2 = event.target.event1.value;
-						var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+						// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
+						var imagesURL = fileObj._id;
 	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser} }, {upsert: true});
 	 					
 	 					
-	 					var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+	 					var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
 	 					//Contests.update({uploadedImage : imagesURL});
 	 					//Cant do this, need to grab ids for the record we want.
 	 					//Contests.update({hello: "hello"}, {modified: "modified yo!"} );
