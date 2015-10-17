@@ -171,10 +171,9 @@ Template.contests.helpers({
 						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
 						var imagesURL = fileObj._id;
 	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser} }, {upsert: true});
-	 					
-	 					
+
 	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-	 					var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
+	 					//var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
 	 					//Contests.update({uploadedImage : imagesURL});
 	 					//Cant do this, need to grab ids for the record we want.
 	 					//Contests.update({hello: "hello"}, {modified: "modified yo!"} );
@@ -182,10 +181,9 @@ Template.contests.helpers({
 	 					//var event2 = event.target.event2.value;
 	 					//  insert worksContests.insert({myImage: imagesURL, userId: curUser});
 
-
 	 				} //end else block
 	 			// end for loop		
-	 					
+
 		 		//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
 		 
 	 				}
