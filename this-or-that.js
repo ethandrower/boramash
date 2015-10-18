@@ -44,7 +44,7 @@ if (Meteor.isClient) {
   
 Template.contests.helpers({
 	contests: function () { 
-		return Contests.find({}) ;
+		return Contests.find({isActive: true}) ;
 	}
 	
 });
@@ -60,6 +60,30 @@ Template.contests.helpers({
 	 
  });
  
+
+Template.mycontests.events({
+"click .userContestControlButton_Pause": function () {
+
+	// logic for pausing here
+	var doc = Contests.findOne({contestId: this.contestId});
+	
+	Contests.update(this.contestId, {$set: {isActive: !doc.isActive}}, {upsert: true});
+
+},
+"click .userContestControlButton_Delete": function () {
+
+	// find ID of contest.
+	//delete contest.
+
+	Contests.remove(this.contestId);
+	console.log("in remove clause");
+
+}
+
+});
+
+
+
  
  /* Template.allImages.helpers({
 
@@ -159,7 +183,7 @@ Template.contests.helpers({
 						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
-						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser}}, {upsert: true}  );
+						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true}}, {upsert: true}  );
 	 					firstImage = false;
 	 				}
 
@@ -170,7 +194,7 @@ Template.contests.helpers({
 						// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
 						var imagesURL = fileObj._id;
-	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser} }, {upsert: true});
+	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true} }, {upsert: true});
 
 	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 	 					//var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
