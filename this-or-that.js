@@ -14,6 +14,14 @@ ImageStore = new FS.Store.FileSystem("images", {
 
 Images = new FS.Collection("images", {
 
+	filter: {
+		maxSize: 1048576,
+		allow: {
+			contentTypes: ['image/*'],
+			extensions: ['png', 'jpg']
+		}
+	},
+
 	stores: [ImageStore]
 	//stores: [new FS.Store.FileSystem("images2", {path: "~/public/images"})]
 
@@ -145,6 +153,12 @@ Template.mycontests.events({
 	 		console.log("in func");
 	 		
 	 		console.log(event);
+
+
+	 		var userId = Meteor.user().username;
+
+	 		console.log(userId);
+	 		
 
 	 		 var file = template.findAll('input:file');
 
