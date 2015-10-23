@@ -17,37 +17,37 @@
 
   <div class="container">
 <a href="/addcontest">Add a new contest here</a>
-
-
- 
   
 	{{#each myContests}}
-	{{> userContest}}
+	<!-- old :	{{> userContest}} -->
+	<div class="userContestRow" >
+
+		<div class="userContestPreview">
+			{{#each contestImages}}
+				{{>contestimage}}			
+			{{/each}}		
+		</div>
+
+		<div class="userContestControls">
+			<ul>
+				<li><button type="button" class="userContestControlButton_Pause"> Pause </button> </li>
+				<li><button type="button" class="userContestControlButton_Delete"> Delete </button></li>
+			</ul>
+		</div>
+	</div>
 	{{/each}}
   
-  
-  </div>
-	
-	
+  </div>	
 </template>
 
+<!-- old
 <template name="userContest">
-
 <div class="userContestRow" >
 
 	<div class="userContestPreview">
-
-			<span class="entry">
-		<img class="entry" src="/cfs/files/images/{{entry1}}">
-		<span class="btn"> <button type="button" class="vote1 btn">Vote for #1  ({{vote1_count}})</button>  </span>
-		
-	</span>
-	
-	<span class="entry">
-			<img class="entry" src="/cfs/files/images/{{entry2}}">
-			<button type="button" class="btn vote2 button-clear">Vote for #2  ({{vote2_count}})</button> 
-	</span>
-
+		{{#each contestImages}}
+			{{>contestimage}}			
+		{{/each}}		
 	</div>
 
 	<div class="userContestControls">
@@ -59,6 +59,17 @@
 
 	</div>
 </div>
-	
 </template>
+-->
+
+<template name="contestimage">
+	<span class="entry">
+		<img class="entry" src="/cfs/files/images/{{entry}}">
+		<button type="button" class="btn vote button-clear">Vote  ({{votes}})</button> <!-- I don't understand what this button is here for? -->		
+	</span>
+</template>
+
+	
+
+
 	

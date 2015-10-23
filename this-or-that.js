@@ -1,6 +1,16 @@
+// Note from Cassy: I made some changes to facilitate >2 image contests. 
+// It increases the complexity of the project but not by too much. 
 
-
+// Contest entry:
+// {contestId : (unique id of contest), userId : (id of uploader), isActive : boolean, count : number of images}
 Contests = new Mongo.Collection("Contests");
+
+// Contest image entry:
+// {parent : foreign key to ._id of parent contest, url : url to image, votes : number of votes, id : image id for current contest}
+ContestImages = new Mongo.Collection("ContestImages");
+
+// UserAccount entry:
+// (we don't seem to have any code that uses this? Is it taken care of by the canned method meteor provides?)
 UserAccounts = new Mongo.Collection('Users');
 
 //ImageStore = new FS.Store.GridFS("images");
@@ -48,6 +58,20 @@ if (Meteor.isServer)
 }
 
 if (Meteor.isClient) {
+	
+	function addImage(cid, urlin){
+		console.log("in addImage");
+		console.log("cid: " + cid + "\turl: " + urlin);
+		ContestImages.insert({
+			parent : cid, 
+			url : urlin, 
+			votes : 0, 
+			imageId : Contests.findOne({contestId : cid}).count // Is this necessary? Mongo gives it a ._id anyway...
+			});
+			
+		Contests.update(cid, {$inc: { count : 1}});
+		
+	}
 
   
 Template.contests.helpers({
@@ -57,17 +81,25 @@ Template.contests.helpers({
 	
 });
   
+	
  Template.mycontests.helpers({
 	 myContests: function () {
 		 var currentUserId = Meteor.userId();
 		 console.log(currentUserId);
 		 
-		return Contests.find({userId: currentUserId}) ; 
-		
-	 }
-	 
+		// return Contests.find({userId : currentUserId}) ; 	
+		return Contests.find({userId : currentUserId}).map(function(parentContest) {
+			return _.extend(parentContest, {contestImages : ContestImages.find({parent : parentContest._id}).fetch()});
+		});
+	 },
  });
  
+ // Template.userContest.contestImages = function () { return ContestImages.find({parent : Session.get('userContest').contestId});	}
+ 
+ Template.contestimage.helpers({
+	 entry : function () { console.log(ContestImages.findOne(this._id)); return ContestImages.findOne(this._id).url;},
+	 votes : function () { return ContestImages.findOne(this._id).votes;}
+ });
 
 Template.mycontests.events({
 "click .userContestControlButton_Pause": function () {
@@ -89,8 +121,6 @@ Template.mycontests.events({
 }
 
 });
-
-
 
  
  /* Template.allImages.helpers({
@@ -122,6 +152,8 @@ Template.mycontests.events({
 */
  
 	 Template.contest.events({ 
+	 
+	 /* old
 	 "click .vote1": function () {
 		 
 	 Contests.update(this._id, {
@@ -138,29 +170,34 @@ Template.mycontests.events({
 	//			$push {votedOn: this._id} );
 
 			}
+			*/
 		});
 	
 
 /////Test method  ////////////
 
  Template.addcontest.events({
-	 	"submit form" : function(event, template){
-	 		 event.preventDefault(); 
+	 	"submit .new-contest" : function(event, template){
+	 		event.preventDefault(); 
+
 	 		var firstImage = true;
 	 		var contestId = Random.id(5);
-	 		
 	 		var curUser = Meteor.userId();
 	 		console.log("in func");
 	 		
+			Contests.update(contestId, {$set: {
+				contestId : contestId, 
+				userId : curUser, 
+				isActive : true, 
+				count : 0
+				}}, {upsert: true}  );
+			
 	 		console.log(event);
 
-
 	 		var userId = Meteor.user().username;
-
 	 		console.log(userId);
-	 		
 
-	 		 var file = template.findAll('input:file');
+	 		var file = template.findAll('input:file');
 
 	 		console.log(file);
 	 		console.dir(file);
@@ -190,25 +227,29 @@ Template.mycontests.events({
 	 					//file upload was a success!!
 	 					console.log("upload successful? ");
 
+					var imagesURL;
+					
+					// Each if/else should assign the proper URL to the imagesURL variable;
+					// this is then passed to the addImage method to update the databases
 	 				if(firstImage)
-	 				{
+	 				{ 
 	 					var event1 = event.target.event1.value;
 						//var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-						var imagesURL = fileObj._id;
+						imagesURL = fileObj._id;
 						console.log("updating image1");
 
-						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true}}, {upsert: true}  );
+						// Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true}}, {upsert: true}  );
 	 					firstImage = false;
 	 				}
-
 	 				else
 	 				{
 	 					console.log("in else clause so second image");
-	 					var event2 = event.target.event1.value;
+	 					var event2 = event.target.event2.value;
 						// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
-						var imagesURL = fileObj._id;
-	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true} }, {upsert: true});
+						imagesURL = fileObj._id;
+						
+	 					//Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true} }, {upsert: true});
 
 	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 	 					//var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
@@ -220,14 +261,16 @@ Template.mycontests.events({
 	 					//  insert worksContests.insert({myImage: imagesURL, userId: curUser});
 
 	 				} //end else block
-	 			// end for loop		
 
-		 		//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
+					addImage(contestId, imagesURL);
+	 			
+					//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
 		 
-	 				}
+	 				} // end for loop		
 	 			});// end insert function
 			}//end for loop
-	 				
+	 		
+			
 	 		
 	 	 //});
 	 	console.log("out"); // close each file
@@ -307,7 +350,7 @@ Template.mycontests.events({
  });
  
  
- }// close server code conditional
+ }// close client code conditional
  
  
 Router.route('/addcontest');
