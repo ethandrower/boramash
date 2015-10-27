@@ -2,7 +2,7 @@
 
 Contests = new Mongo.Collection("Contests");
 UserAccounts = new Mongo.Collection('Users');
-
+UserVoted = new Mongo.Collection('UserVoted');
 //ImageStore = new FS.Store.GridFS("images");
 ImageStore = new FS.Store.FileSystem("images", {
 
@@ -122,8 +122,20 @@ Template.mycontests.events({
  });
 */
  
+ //This function incrememnts our users 'total vote' count
+var clickedUser = function() {
+	var currentUserId = Meteor.userId();
+	console.log("user id on click! " + currentUserId);
+
+	UserVoted.update({_id: currentUserId}, {$inc: {votedCount: 1}}, {upsert: true});
+
+
+
+};
+
 	 Template.contest.events({ 
 	 "click .vote1": function () {
+	 	clickedUser();
 		 
 	 Contests.update(this._id, {
 		 $inc: {vote1_count: 1}   
@@ -131,7 +143,7 @@ Template.mycontests.events({
 	 
 	 },
 		"click .vote2": function () {
-		 
+		 	clickedUser();
 			Contests.update(this._id, {
 			$inc: {vote2_count: 1}   
 			});
@@ -200,7 +212,7 @@ Template.mycontests.events({
 						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
-						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true, userName: currentUserId}}, {upsert: true}  );
+						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, contestName: subContestName, userId: curUser, isActive: true, userName: currentUserId}}, {upsert: true}  );
 	 					firstImage = false;
 	 				}
 
