@@ -6,6 +6,22 @@
 <body>
    {{> loginButtons}}
   
+  <h1>Website Comparisons</h1>
+
+  
+
+  <div class="container">
+<a href="/addcontest">Add a new contest here</a>
+
+
+
+  
+	{{#each contests}}
+	
+	{{/each}}
+
+  
+  </div>
   
   
 </body>
@@ -26,13 +42,15 @@
 
 
 <template name="contests">
- <h1>Website Comparisons</h1>
+ 
 
   
 
-  <div class="container">
+ <!--  
+<h1>Website Comparisons</h1>
+ <div class="container"> 
 <a href="/addcontest">Add a new contest here</a>
-
+-->
 
 
   
@@ -41,22 +59,26 @@
 	{{/each}}
 
   
-  </div>
+ <!--  </div>  -->
 	
-	</template> 
+	</template>  
 
 
 
 
 <template name="contest">
 	<!-- <iframe class="link-preview" src="{{entry1}}" sandbox='' allowscripts="no" scrolling="no"></iframe>   -->
-
-
+	
 <div class="contest-row">
-			
+	<div class="submittedBy"> Submitted by {{userName}}	 </div>
+
 	<span class="entry">
+
 		<img class="entry" src="/cfs/files/images/{{entry1}}">
+
 		<span class="btn"> <button type="button" class="vote1 btn">Vote for #1  ({{vote1_count}})</button>  </span>
+		
+
 		
 	</span>
 	
@@ -64,6 +86,9 @@
 			<img class="entry" src="/cfs/files/images/{{entry2}}">
 			<button type="button" class="btn vote2 button-clear">Vote for #2  ({{vote2_count}})</button> 
 	</span>
+<div>
+	
+</div>
 	
 </div>
 </template>

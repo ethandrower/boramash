@@ -49,9 +49,10 @@ if (Meteor.isServer)
 
 if (Meteor.isClient) {
 
-  
+ //Template.contests.helpers({ 
 Template.contests.helpers({
 	contests: function () { 
+		console.log("in contests");
 		return Contests.find({isActive: true}) ;
 	}
 	
@@ -154,11 +155,13 @@ Template.mycontests.events({
 	 		
 	 		console.log(event);
 
+	 		var subContestName = event.target.contestName.value;
+	 		console.log("contesname is : " + subContestName);
 
-	 		var userId = Meteor.user().username;
+	 		var currentUserId = Meteor.user().username;
 
-	 		console.log(userId);
-	 		
+	 		//console.log(userId);
+
 
 	 		 var file = template.findAll('input:file');
 
@@ -197,7 +200,7 @@ Template.mycontests.events({
 						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
-						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true}}, {upsert: true}  );
+						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, userId: curUser, isActive: true, userName: currentUserId}}, {upsert: true}  );
 	 					firstImage = false;
 	 				}
 
@@ -208,7 +211,7 @@ Template.mycontests.events({
 						// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
 						var imagesURL = fileObj._id;
-	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true} }, {upsert: true});
+	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true, userName: currentUserId} }, {upsert: true});
 
 	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
 	 					//var imagesURL = { "sotredimage": "public/images/" + fileObj._id};

@@ -17,6 +17,9 @@
 
     width: 1200px;
 	display: block;
+  height: auto;
+  overflow: auto;
+
 }
 
 .btn {
@@ -27,7 +30,19 @@
 		
 }
 
- 
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100%;
+  background: white;
+}
+
+ .submittedBy {
+
+   
+   max-height:20px;
+    text-align: left;
+ }
 
 
 
