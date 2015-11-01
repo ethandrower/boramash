@@ -157,6 +157,7 @@ var clickedUser = function() {
 /////Test method  ////////////
 
 var userCanCreateContest = function() {
+	FlashMessages.sendWarning("Contest Could not be added, you must vote in 5 contests before creating your own!");
 	var currentUserId = Meteor.userId();
 	var numOfVotesRow = UserVoted.find({_id: currentUserId}).fetch();
 	console.log("num votes row returned" + numOfVotesRow);
