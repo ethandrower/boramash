@@ -16,7 +16,7 @@
 
 
   <div class="container">
-<a href="/addcontest">Add a new contest here</a>
+<!-- <a href="/addcontest">Add a new contest here</a> -->
 
 
  
@@ -33,32 +33,32 @@
 
 <template name="userContest">
 
-<div class="userContestRow" >
+<div class="contest-row" >
 
-	<div class="userContestPreview">
+	<!-- <div class="userContestPreview"> -->
 
 			<span class="entry">
 		<img class="entry" src="/cfs/files/images/{{entry1}}">
 		
-		<span class="btn"> <button type="button" class="vote1 btn">Vote for #1  ({{vote1_count}})</button>  </span>
+		<span class="btn"> <button type="button" class="vote1 btn">Vote Count ({{vote1_count}})</button>  </span>
 		
 	</span>
 	
 	<span class="entry">
 			<img class="entry" src="/cfs/files/images/{{entry2}}">
-			<button type="button" class="btn vote2 button-clear">Vote for #2  ({{vote2_count}})</button> 
+			<button type="button" class="btn vote2 button-clear">Vote Count ({{vote2_count}})</button> 
 	</span>
 
-	</div>
+	<!-- 	</div> -->
 
-	<div class="userContestControls">
+	<span class="userContestControls">
 		<ul>
 			<li><button type="button" class="userContestControlButton_Pause"> Pause </button> </li>
 			<li><button type="button" class="userContestControlButton_Delete"> Delete </button></li>
 		</ul>
 
 
-	</div>
+	</span>
 </div>
 	
 </template>

@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@charset "UTF-8";
 /* CSS declarations go here */
 
 
@@ -31,7 +33,7 @@
 }
 
 .container {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -76,8 +78,7 @@
 
 
 /* CSS menu styles */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-@charset "UTF-8";
+
 /* Base Styles */
 #cssmenu ul,
 #cssmenu li,
