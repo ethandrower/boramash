@@ -1,0 +1,11 @@
+added event handler and new collection UserVoted to handle keeping track of how many contests a user has voted on
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: System Administrator <root@loop-depaulsecure-182-109.depaulsecure-employee.depaul.edu>
+#
+# On branch styled
+# Changes to be committed:
+#	modified:   this-or-that.js
+#

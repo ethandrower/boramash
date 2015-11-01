@@ -168,7 +168,9 @@ var clickedUser = function() {
 	 		console.log(event);
 
 	 		var subContestName = event.target.contestName.value;
-	 		console.log("contesname is : " + subContestName);
+	 		var subContestDescrip = event.target.descrip.value;
+
+	 		console.log("contestdescrip  is : " + subContestDescrip );
 
 	 		var currentUserId = Meteor.user().username;
 
@@ -212,7 +214,7 @@ var clickedUser = function() {
 						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
-						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, contestName: subContestName, userId: curUser, isActive: true, userName: currentUserId}}, {upsert: true}  );
+						Contests.update(contestId, {$set: { entry1: imagesURL, contestId: contestId, contestName: subContestName, contestDescription: subContestDescrip, userId: curUser, isActive: true, userName: currentUserId}}, {upsert: true}  );
 	 					firstImage = false;
 	 				}
 
@@ -225,14 +227,7 @@ var clickedUser = function() {
 						var imagesURL = fileObj._id;
 	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true, userName: currentUserId} }, {upsert: true});
 
-	 					// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-	 					//var imagesURL = { "sotredimage": "public/images/" + fileObj._id};
-	 					//Contests.update({uploadedImage : imagesURL});
-	 					//Cant do this, need to grab ids for the record we want.
-	 					//Contests.update({hello: "hello"}, {modified: "modified yo!"} );
-	 					//var event1 = event.target.event1.value;
-	 					//var event2 = event.target.event2.value;
-	 					//  insert worksContests.insert({myImage: imagesURL, userId: curUser});
+	
 
 	 				} //end else block
 	 			// end for loop		
