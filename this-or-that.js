@@ -27,6 +27,8 @@ Images = new FS.Collection("images", {
 
 
 });
+
+
 if (Meteor.isServer)
 {
 
@@ -45,9 +47,17 @@ if (Meteor.isServer)
 	 }
 	});
 
+
 }
 
 if (Meteor.isClient) {
+
+
+	FlashMessages.configure({
+    autoHide: false,
+    hideDelay: 5000,
+    autoScroll: true
+  });
 
  //Template.contests.helpers({ 
 Template.contests.helpers({
@@ -157,7 +167,7 @@ var clickedUser = function() {
 /////Test method  ////////////
 
 var userCanCreateContest = function() {
-	FlashMessages.sendWarning("Contest Could not be added, you must vote in 5 contests before creating your own!");
+	
 	var currentUserId = Meteor.userId();
 	var numOfVotesRow = UserVoted.find({_id: currentUserId}).fetch();
 	console.log("num votes row returned" + numOfVotesRow);
@@ -172,11 +182,23 @@ var userCanCreateContest = function() {
 	var votes = votesParsed[0].votedCount;
 
 	console.log("votes value: " + votes);
+	if (votes >= 5)
+	{
+		return true;
+	}
+	else return false;
+
 
 };
  Template.addcontest.events({
 	 	"submit form" : function(event, template){
-	 		userCanCreateContest();
+	 	if (!userCanCreateContest())
+	 	{
+	 		FlashMessages.sendWarning("Contest Could not be added, you must vote in 5 contests before creating your own!", {autoHide: false});
+	 		return false;
+	 	}
+
+
 
 	 		 event.preventDefault(); 
 	 		var firstImage = true;
