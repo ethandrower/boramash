@@ -156,8 +156,27 @@ var clickedUser = function() {
 
 /////Test method  ////////////
 
+var userCanCreateContest = function() {
+	var currentUserId = Meteor.userId();
+	var numOfVotesRow = UserVoted.find({_id: currentUserId}).fetch();
+	console.log("num votes row returned" + numOfVotesRow);
+	console.log(JSON.stringify(numOfVotesRow, null, 2));
+	//var votes = numOfVotesRow["votedCount"]; nope
+	//var votes = numOfVotesRow.votedCount; nope
+
+	var votesParsed = JSON.parse(JSON.stringify(numOfVotesRow));
+	console.log(votesParsed);
+
+	//var votes = votesParsed.votedCount;
+	var votes = votesParsed[0].votedCount;
+
+	console.log("votes value: " + votes);
+
+};
  Template.addcontest.events({
 	 	"submit form" : function(event, template){
+	 		userCanCreateContest();
+
 	 		 event.preventDefault(); 
 	 		var firstImage = true;
 	 		var contestId = Random.id(5);
@@ -192,6 +211,8 @@ var clickedUser = function() {
 	 		//FS.Utility.eachFile(formFile.files, function(file) {
 
 // working ///   	Images.insert(file.files[0], function (err, fileObj) {
+
+
 
 
 				for (x=0; x < file.length; x++)
