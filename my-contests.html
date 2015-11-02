@@ -40,40 +40,46 @@
 
 	<!-- <div class="userContestPreview"> -->
 
-			<span class="entry">
+	<div class="entry">
 		<img class="entry" src="/cfs/files/images/{{entry1}}">
 		
 		<span class="btn"> <button type="button" class="vote1 btn">Vote Count ({{vote1_count}})</button>  </span>
 		
-	</span>
+	</div>
 	
-	<span class="entry">
+	<div class="entry">
 			<img class="entry" src="/cfs/files/images/{{entry2}}">
 			<button type="button" class="btn vote2 button-clear">Vote Count ({{vote2_count}})</button> 
-	</span>
+	</div>
 
 	<!-- 	</div> -->
 
-	<span class="userContestControls">
+	<div class="userContestControls">
 		<ul>
 			<li><button type="button" class="userContestControlButton_Pause"> Pause </button> </li>
 			<li><button type="button" class="userContestControlButton_Delete"> Delete </button></li>
-		<span class="userContestInfo">
-			<li><b>Contest Name:</b> {{contestName}}</li>
-			<li><b>Description:</b> {{contestDescription}} </li>
-		</span>
+		<div class="userContestInfo">
+			<li>
+				<div><b>Contest Name:</b></div>
+				<div class="user-contest-status-value">{{contestName}}</div>
+			</li>
+			<li>
+				<div><b>Description:</b></div>
+				<div class="user-contest-status-value">{{contestDescription}} </div>
+			</li>
+		</div>
 
 		</ul>
 
-	<div>
+	<div class="userContestStatus">
 		{{#if isActive}}
-		<b>Status:</b> Active
+		<b>Status:</b><span class="user-contest-status-value"> Active</span>
 		{{else}}
-		<b>Status:</b> Paused
+		<b>Status:</b><span class="user-contest-status-value"> Paused</span>
 		{{/if}}
 	</div>
 
-	</span>
+	</div>
 </div>
 	
 </template>
