@@ -148,7 +148,7 @@ var clickedUser = function() {
 	 	
 	 	if (Session.get(this._id)  == 'voted')
 	 	{
-	 		FlashMessages.sendWarning("You already voted on this one!");
+	 		FlashMessages.sendWarning("You already voted on this contest!");
 	 	}
 	 	else {
 	 	clickedUser();
@@ -166,7 +166,7 @@ var clickedUser = function() {
 
 			if (Session.get(this._id) == 'voted')
 			{
-				FlashMessages.sendWarning("You already voted on this");
+				FlashMessages.sendWarning("You already voted on this contest!");
 			}
 			else {
 		 	clickedUser();
