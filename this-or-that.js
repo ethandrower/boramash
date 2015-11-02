@@ -255,7 +255,7 @@ var userCanCreateContest = function() {
 // working ///   	Images.insert(file.files[0], function (err, fileObj) {
 
 
-
+			var errorOccurred = false; 
 
 				for (x=0; x < file.length; x++)
 			{
@@ -264,6 +264,9 @@ var userCanCreateContest = function() {
 	 			Images.insert(file[x].files[0], function (err, fileObj) {
 	 				if (err){
 	 					console.log("error on file upload! " + err);
+	 					FlashMessages.sendError("Error on upload: Image #"+ (x+1));
+	 					errorOccurred = true;
+
 	 					//handle file upload error here
 	 				}
 	 				else {
@@ -303,7 +306,11 @@ var userCanCreateContest = function() {
 	 				
 	 		
 	 	 //});
-	 	console.log("out"); // close each file
+		if(!errorOccurred)
+		{
+	 	FlashMessages.sendWarning("Contest Added!");
+	 }
+	 else { FlashMessages.sendWarning("An error has occured uploading one or both images, please double check your files or your contest may not display properly.")}
 
 	 }}); //close addcontest.events
 
