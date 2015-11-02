@@ -14,47 +14,44 @@
 
 
 <template name="addcontest">
-{{#if currentUser}}
+	<div class="add-content-box">
+	{{#if currentUser}}
 
-<div class="sub-container"> <h1> Add a contest! </h1>
+	<div class="sub-container add-content-area"> 
+		<h1 class="main-title"> Add a contest! </h1>
+		<div class="sub-title">Max Image Size: 10mb; File Types Allowed: png/jpg</div>
 
-Max Image Size: 10mb; File Types Allowed: png/jpg
 
-
-  
-  <div class="container">
-  
-  <!-- 
-<form class="new-contest">
-		<input type="text" name="site1" placeholder="link to first site" />
-		
-		<input type="text" name="site2" placeholder="link to second site" />
-		
-		<input type="submit" value="Add Contest">
-		
+	  
+	  <div class="container">
+	  
+	  <!-- 
+		<form class="new-contest">
+			<input type="text" name="site1" placeholder="link to first site" />
+			
+			<input type="text" name="site2" placeholder="link to second site" />
+			
+			<input type="submit" value="Add Contest">
+			
 		</form>  -->
 
+		<form class="add-contest-form">
+			<input type="text" class="contestname-text" name="contestName" placeholder="Enter A Name for your Contest">
+			<input type="file" name="event1" class="myFileInput">
+			<input type="file" name="event2" class="myFileInput">
+			<textarea class="description-textarea" name="descrip"></textarea>
+			<input class="submit-action" type="submit" value="Add Contest" >
+		</form> 
 
-	<form>
-	<input type="text" name="contestName" placeholder="Enter A Name for your Contest">
-	<input type="file" name="event1" class="myFileInput">
-	<input type="file" name="event2" class="myFileInput">
+	  </div>
+	  
+	</div>
 
-<textarea name="descrip"></textarea>
-	<input type="submit" value="Add Contest" >
-</form>
+	{{/if}}
 
- 
-
-  </div>
-  
-</div>
-
-{{/if}}
-
-{{#unless currentUser}}<div class="sub-container">
-<h3> You need to sign up or login to add contests! </h3></div>
-{{/unless}}
-
+	{{#unless currentUser}}<div class="sub-container">
+	<h3> You need to sign up or login to add contests! </h3></div>
+	{{/unless}}
+	</div>
 
 </template>

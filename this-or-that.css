@@ -17,7 +17,7 @@ h1 {
 .login-buttons { 
   color: black;
   right: 10px;
-  position: fixed;
+  position: absolute;
   top: 7px;
   font-size: 18px;
   width: 255px;  
@@ -187,11 +187,15 @@ font-size:1.1em;
   transition: all 0.3s ease-in-out;  
   padding: 8px 15px 9px 15px;
   display: block;
-  text-decoration: none;
+  text-decoration: none !important;
   border: 1px solid transparent;
   color: rgba(0,0,0,0.5);
   font-weight: bold;
   font-style: normal;
+}
+
+#login-buttons a, .accounts-dialog a{
+  text-decoration: none !important;
 }
 
 #cssmenu li.active {
@@ -211,4 +215,10 @@ font-size:1.1em;
   display: block;
 }
 
+.main-title{
+  padding: 0px 8px;
+}
 
+.sub-container{
+  padding: 5px 8px;
+}
