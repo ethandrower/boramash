@@ -5,8 +5,8 @@
 
 
 body {
-
-  background: #c9d8c5;
+  margin: 0px;
+  background: #f9f9f9;
 }
 
 h1 {
@@ -14,7 +14,31 @@ h1 {
 
 }
 
-.login-buttons { color: black;}
+.login-buttons { 
+  color: black;
+  right: 10px;
+  position: fixed;
+  top: 7px;
+  font-size: 18px;
+  width: 255px;  
+}
+
+#login-buttons{
+  width: 100%;
+}
+
+.login-link-and-dropdown-list a.login-link-text{
+  width: 100%;
+  text-align: right;
+  display: block;
+  position: relative;
+}
+
+#login-dropdown-list{
+  left: 0px;
+  top: 0px;
+}
+
 .entry {
 	
 	width:500px;
@@ -51,7 +75,7 @@ margin:30px 0 30px 15px;
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100%;
-  background:  #c9d8c5
+  background:  #f9f9f9
 
 }
 
@@ -79,16 +103,6 @@ margin:30px 0 30px 15px;
    
     border: none;
     pointer-events: none;
- 
- /*
-    -webkit-transform: scale(0.2);
-    -moz-transform: scale(0.2);
-    -ms-transform: scale(0.2);
-    transform: scale(1.0);
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    transform-origin: 0 0;  */
 
 }
 
@@ -139,38 +153,14 @@ font-size:1.1em;
   font-family: 'Lato', sans-serif;
 }
 #cssmenu {
-  border: 1px solid #133e40;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
   width: auto;
+  background-color: rgba(0,0,0,0.1);
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.5);
+
 }
 #cssmenu ul {
   zoom: 1;
-  /*
-  background: #36b0b6;  
-  */
-
-  background: #7d4627;
- 
-  /*
-  background: -moz-linear-gradient(top, #36b0b6 0%, #2a8a8f 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #36b0b6), color-stop(100%, #2a8a8f));
-  background: -webkit-linear-gradient(top, #36b0b6 0%, #2a8a8f 100%);
-  background: -o-linear-gradient(top, #36b0b6 0%, #2a8a8f 100%);
-  background: -ms-linear-gradient(top, #36b0b6 0%, #2a8a8f 100%);
-  background: linear-gradient(top, #36b0b6 0%, #2a8a8f 100%);
-  */
-
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@top-color', endColorstr='@bottom-color', GradientType=0);
-  padding: 5px 10px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
 }
 #cssmenu ul:before {
   content: '';
@@ -184,66 +174,41 @@ font-size:1.1em;
 #cssmenu li {
   float: left;
   margin: 0 5px 0 0;
-  border: 1px solid transparent;
+  color: rgba(0,0,0,0.7);
+-webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
 }
 #cssmenu li a {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+-webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;  
   padding: 8px 15px 9px 15px;
   display: block;
   text-decoration: none;
-  color: #ffffff;
   border: 1px solid transparent;
-  font-size: 16px;
+  color: rgba(0,0,0,0.5);
+  font-weight: bold;
+  font-style: normal;
 }
 
 #cssmenu li.active {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
   border: 1px solid #36b0b6;
 }
 #cssmenu li.active a {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
   display: block;
   background: #1e6468;
   border: 1px solid #133e40;
-  -moz-box-shadow: inset 0 5px 10px #133e40;
-  -webkit-box-shadow: inset 0 5px 10px #133e40;
-  box-shadow: inset 0 5px 10px #133e40;
+  -moz-box-shadow:  0 5px 10px #133e40;
+  -webkit-box-shadow:  0 5px 10px #133e40;
+  box-shadow:  0 5px 10px #133e40;
 }
-#cssmenu li:hover {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  /* border: 1px solid #36b0b6; */
- border: 1px solid #a8b6bf;
-}
+
 #cssmenu li:hover a {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+  color: rgba(0,0,0,1);
   display: block;
-  /*background: #1e6468; */
-  background: #a8b6bf;
-  /*border: 1px solid #133e40; */
-  border: 1px solid #a8b6bf;
-  -moz-box-shadow: inset 0 5px 10px #133e40;
-  -webkit-box-shadow: inset 0 5px 10px #133e40;
-  box-shadow: inset 0 5px 10px #a8b6bf;
 }
 
 

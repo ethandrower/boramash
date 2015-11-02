@@ -4,9 +4,9 @@
 </head>
 
 <body>
-	<span class="login-buttons">
-   {{> loginButtons}}
-</span>
+	<div class="login-buttons">
+	   {{> loginButtons}}
+	</div>
    {{> flashMessages}}
   
   <h1>Website Comparisons</h1>
@@ -45,7 +45,7 @@
 
 
 <template name="contests">
- 
+ <div class="sub-container">
 
   
 
@@ -63,7 +63,7 @@
 
   
  <!--  </div>  -->
-	
+</div>	
 	</template>  
 
 
@@ -71,7 +71,7 @@
 
 <template name="contest">
 	<!-- <iframe class="link-preview" src="{{entry1}}" sandbox='' allowscripts="no" scrolling="no"></iframe>   -->
-	
+<div class="sub-container">
 <div class="contest-row">
 	<div class="submittedBy"> Submitted by {{userName}}	 </div>
 
@@ -93,7 +93,7 @@
 	
 </div>
 	
-</div>
+</div></div>
 </template>
 <!--
 <div class="contest-row">

@@ -1,12 +1,12 @@
 <head>
 	<div id='cssmenu'>
-<ul>
-   <li><a href='/'><span>Home</span></a></li>
-   <li><a href='/mycontests'><span>My Contests</span></a></li>
-   <li><a href='/addcontest'><span>Add A Contest</span></a></li>
-   <li class='last'><a href='#'><span>Contact</span></a></li>
-</ul>
-</div>
+		<ul>
+		   <li><a href='/'><span>Home</span></a></li>
+		   <li><a href='/mycontests'><span>My Contests</span></a></li>
+		   <li><a href='/addcontest'><span>Add A Contest</span></a></li>
+		   <li class='last'><a href='#'><span>Contact</span></a></li>
+		</ul>
+	</div>
   <title>Add a Contest</title>
 
 </head>
@@ -16,7 +16,7 @@
 <template name="addcontest">
 {{#if currentUser}}
 
-<body> <h1> Add a contest! </h1>
+<div class="sub-container"> <h1> Add a contest! </h1>
 
 Max Image Size: 10mb; File Types Allowed: png/jpg
 
@@ -48,12 +48,12 @@ Max Image Size: 10mb; File Types Allowed: png/jpg
 
   </div>
   
-</body>
+</div>
 
 {{/if}}
 
-{{#unless currentUser}}
-<h3> You need to sign up or login to add contests! </h3>
+{{#unless currentUser}}<div class="sub-container">
+<h3> You need to sign up or login to add contests! </h3></div>
 {{/unless}}
 
 
