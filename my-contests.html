@@ -57,13 +57,18 @@
 		<ul>
 			<li><button type="button" class="userContestControlButton_Pause"> Pause </button> </li>
 			<li><button type="button" class="userContestControlButton_Delete"> Delete </button></li>
+		<span class="userContestInfo">
+			<li><b>Contest Name:</b> {{contestName}}</li>
+			<li><b>Description:</b> {{contestDescription}} </li>
+		</span>
+
 		</ul>
 
 	<div>
 		{{#if isActive}}
-		Status: Active
+		<b>Status:</b> Active
 		{{else}}
-		Status: Paused
+		<b>Status:</b> Paused
 		{{/if}}
 	</div>
 
