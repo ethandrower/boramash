@@ -95,13 +95,21 @@ margin:30px 0 30px 15px;
    list-style-type: none;
 }
 
- .userContestControlButton {
+ .userContestControlButton_Pause {
   margin: 5px 0 5px 15px;
   background: #a8b6bf;
   border-radius:5px;
 font-size:1.1em;
 
 }
+.userContestControlButton_Delete {
+  margin: 5px 0 5px 15px;
+  background: #a8b6bf;
+  border-radius:5px;
+font-size:1.1em;
+
+}
+
 /* CSS menu styles */
 
 /* Base Styles */
