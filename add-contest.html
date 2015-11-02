@@ -19,33 +19,40 @@
 
 	<div class="sub-container add-content-area"> 
 		<h1 class="main-title"> Add a contest! </h1>
-		<div class="sub-title">Max Image Size: 10mb; File Types Allowed: png/jpg</div>
+		<div class="sub-title">Max Image Size: 10mb; File Types Allowed: png/jpg</div>	  
+		<div class="container">
+		  
+		  <!-- 
+			<form class="new-contest">
+				<input type="text" name="site1" placeholder="link to first site" />
+				
+				<input type="text" name="site2" placeholder="link to second site" />
+				
+				<input type="submit" value="Add Contest">
+				
+			</form>  -->
 
+			<form class="add-contest-form">
+				<div class="item-block"><div class="input-block">
+					<input type="text" class="contestname-text" name="contestName" placeholder="Enter A Name for your Contest">
+				</div></div>
+				<div class="item-block"><div class="input-block">
+					<input type="file" name="event1" class="myFileInput">
+				</div></div>
+				<div class="item-block"><div class="input-block">
+					<input type="file" name="event2" class="myFileInput">
+				</div></div>
+				<div class="item-block"><div class="input-block">
+					<textarea class="description-textarea" name="descrip" placeholder="Description"></textarea>
+				</div></div>
+				<div class="item-block"><div class="input-block">
+					<input class="submit-action" type="submit" value="Add Contest" >
+				</div></div>
+			</form> 
 
-	  
-	  <div class="container">
-	  
-	  <!-- 
-		<form class="new-contest">
-			<input type="text" name="site1" placeholder="link to first site" />
-			
-			<input type="text" name="site2" placeholder="link to second site" />
-			
-			<input type="submit" value="Add Contest">
-			
-		</form>  -->
-
-		<form class="add-contest-form">
-			<input type="text" class="contestname-text" name="contestName" placeholder="Enter A Name for your Contest">
-			<input type="file" name="event1" class="myFileInput">
-			<input type="file" name="event2" class="myFileInput">
-			<textarea class="description-textarea" name="descrip"></textarea>
-			<input class="submit-action" type="submit" value="Add Contest" >
-		</form> 
-
-	  </div>
-	  
-	</div>
+		  </div>
+		  
+		</div>
 
 	{{/if}}
 
