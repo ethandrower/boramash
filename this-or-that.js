@@ -3,12 +3,10 @@
 Contests = new Mongo.Collection("Contests");
 UserAccounts = new Mongo.Collection('Users');
 UserVoted = new Mongo.Collection('UserVoted');
-//ImageStore = new FS.Store.GridFS("images");
+
 ImageStore = new FS.Store.FileSystem("images", {
 
-// don't work **  ImageStore = new FS.Store.FileSystem("../../../public/images", {
-	
-//	ImageStore = new FS.Store.FileSystem("/User/user/testImages", {
+
 });
 
 
@@ -23,8 +21,7 @@ Images = new FS.Collection("images", {
 	},
 
 	stores: [ImageStore]
-	//stores: [new FS.Store.FileSystem("images2", {path: "~/public/images"})]
-
+	
 
 });
 
@@ -59,7 +56,7 @@ if (Meteor.isClient) {
     autoScroll: true
   });
 
- //Template.contests.helpers({ 
+ 
 Template.contests.helpers({
 	contests: function () { 
 		console.log("in contests");
@@ -104,33 +101,8 @@ Template.mycontests.events({
 
 
  
- /* Template.allImages.helpers({
+ 
 
- 	images: function() {
- 		return Images.find();
- 	}
- });  */
-
-  
-/*   Don't need
- Template.addcontest.events({
-	 "submit" : function(event) {
-		 event.preventDefault();
-		 
-		 
-		 var currentUserId = Meteor.userId();
-		 
-		 var site1 = event.target.site1.value;
-		 var site2 = event.target.site2.value;
-		 
-		 Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId} );
-		 
-		Router.go('/');
-		
-	 }
-	 
- });
-*/
  
  //This function incrememnts our users 'total vote' count
 var clickedUser = function() {
@@ -143,6 +115,7 @@ var clickedUser = function() {
 
 };
 
+//event to handle clicks when a user votes on a contest
 	 Template.contest.events({ 
 	 "click .vote1": function () {
 	 	
@@ -174,8 +147,7 @@ var clickedUser = function() {
 			Contests.update(this._id, {
 			$inc: {vote2_count: 1}   
 			});
-	//		Users.update( Meteor.userId {
-	//			$push {votedOn: this._id} );
+	
 
 	 		}//end else
 
@@ -183,25 +155,23 @@ var clickedUser = function() {
 		});
 	
 
-/////Test method  ////////////
 
+//The func is called on addContest Submit, determines if user has voted enough times to be able to create contest
 var userCanCreateContest = function() {
 	
 	var currentUserId = Meteor.userId();
 	var numOfVotesRow = UserVoted.find({_id: currentUserId}).fetch();
 	console.log("num votes row returned" + numOfVotesRow);
 	console.log(JSON.stringify(numOfVotesRow, null, 2));
-	//var votes = numOfVotesRow["votedCount"]; nope
-	//var votes = numOfVotesRow.votedCount; nope
-
+	
 	var votesParsed = JSON.parse(JSON.stringify(numOfVotesRow));
 	console.log(votesParsed);
 
-	//var vots = votesParsed.votedCount;
+	
 	try {
 	var votes = votesParsed[0].votedCount;
 }
-catch (err)
+catch (err) //If user has not voted yet, will throw exception, so just set that user's # of voted contests to 0
 { console.log(err);
 	var votes = 0;
 	
@@ -212,11 +182,13 @@ catch (err)
 	{
 		return true;
 	}
-	//else return false;
+	//else return false;   this will always return true for now, just for testing purposes
 	return true;
 
 
 };
+
+
  Template.addcontest.events({
 	 	"submit form" : function(event, template){
 	 	if (!userCanCreateContest())
@@ -232,38 +204,26 @@ catch (err)
 	 		var contestId = Random.id(5);
 	 		
 	 		var curUser = Meteor.userId();
-	 		console.log("in func");
 	 		
-	 		console.log(event);
+	 		
+	 	
 
 	 		var subContestName = event.target.contestName.value;
 	 		var subContestDescrip = event.target.descrip.value;
 
-	 		console.log("contestdescrip  is : " + subContestDescrip );
+	 		
 
 	 		var currentUserId = Meteor.user().username;
 
-	 		//console.log(userId);
-
+	 		
 
 	 		 var file = template.findAll('input:file');
 
-	 		console.log(file);
-	 		console.dir(file);
-
-	 		//var fileObj = Images.insert(file);
-	 		//console.log("file OBJ is " + fileObj);
-	 		console.log("file is " + file);
-	 		//var files = $('input[type=file]')[0].files;
-	 		//var files = event.target.event1.files;
-
-
-	 		//FS.Utility.eachFile(formFile.files, function(file) {
-
-// working ///   	Images.insert(file.files[0], function (err, fileObj) {
-
 
 			var errorOccurred = false; 
+
+
+			//Loop through each submitted file and try to upload it
 
 				for (x=0; x < file.length; x++)
 			{
@@ -279,12 +239,12 @@ catch (err)
 	 				}
 	 				else {
 	 					//file upload was a success!!
-	 					console.log("upload successful? ");
+	 					
 
 	 				if(firstImage)
 	 				{
 	 					var event1 = event.target.event1.value;
-						//var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
+						
 						var imagesURL = fileObj._id;
 						console.log("updating image1");
 
@@ -296,8 +256,7 @@ catch (err)
 	 				{
 	 					console.log("in else clause so second image");
 	 					var event2 = event.target.event1.value;
-						// old cfs var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-						//var imagesURL = { "sotredimage": "public/images" + fileObj._id};
+						
 						var imagesURL = fileObj._id;
 	 					Contests.update(contestId, {$set:  { entry2: imagesURL, contestId: contestId, userId: curUser, isActive: true, userName: currentUserId} }, {upsert: true});
 
@@ -306,7 +265,7 @@ catch (err)
 	 				} //end else block
 	 			// end for loop		
 
-		 		//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
+		 	
 		 
 	 				}
 	 			});// end insert function
@@ -323,70 +282,8 @@ catch (err)
 	 }}); //close addcontest.events
 
 
-//******* End of test method 
-
-	/*	
-	 Template.addcontest.events({
-	 	'change .myFileInput': function(event, template){
-	 		FS.Utility.eachFile(event, function(file) {
-	 			Images.insert(file, function (err, fileObj) {
-	 				if (err){
-	 					console.log("error on file upload! "+ err);
-	 					//handle file upload error here
-	 				}
-	 				else {
-	 					//file upload was a success!!
-	 				//	console.log("upload successful? ");
-	 					var curUser = Meteor.userId();
-	 					var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-	 					//Contests.update({uploadedImage : imagesURL});
-	 					//Cant do this, need to grab ids for the record we want.
-	 					//Contests.update({hello: "hello"}, {modified: "modified yo!"} );
-
-	 					Contests.insert({myImage: imagesURL, userId: curUser});
-
-		 		//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
-		 
-	 				}
-	 			});
-	 				
-	 		
-	 	}); // close each file
-
-	 }}); //close addcontest.events
-
-		
-	 Template.addcontest.events({
-	 	'change .myFileInput2': function(event, template){
-	 		FS.Utility.eachFile(event, function(file) {
-	 			Images.insert(file, function (err, fileObj) {
-	 				if (err){
-	 					console.log("error on file upload! "+ err);
-	 					//handle file upload error here
-	 				}
-	 				else {
-	 					//file upload was a success!!
-	 				//	console.log("upload successful? ");
-	 					var curUser = Meteor.userId();
-	 					var imagesURL = { "sotredimage": "/cfs/files/images/" + fileObj._id};
-	 					//Contests.update({uploadedImage : imagesURL});
-	 					//Cant do this, need to grab ids for the record we want.
-	 					//Contests.update({hello: "hello"}, {modified: "modified yo!"} );
 
 
-	 					Contests.insert({myImage: imagesURL, userId: curUser});
-
-		 		//Contests.insert({ entry1 : site1, entry2: site2, userId: currentUserId, imageLink: imagesURL} );
-	 				}
-	 			});
-	 				
-	 		
-	 	}); // close each file
-
-	 }}); //close addcontest.events
-
-
-*/
 
 
 	 
