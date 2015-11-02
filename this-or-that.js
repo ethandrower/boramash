@@ -145,22 +145,41 @@ var clickedUser = function() {
 
 	 Template.contest.events({ 
 	 "click .vote1": function () {
+	 	
+	 	if (Session.get(this._id)  == 'voted')
+	 	{
+	 		FlashMessages.sendWarning("You already voted on this one!");
+	 	}
+	 	else {
 	 	clickedUser();
+
+	 	Session.set(this._id, 'voted')
+
 		 
 	 Contests.update(this._id, {
 		 $inc: {vote1_count: 1}   
 		});
+	}
 	 
 	 },
 		"click .vote2": function () {
+
+			if (Session.get(this._id) == 'voted')
+			{
+				FlashMessages.sendWarning("You already voted on this");
+			}
+			else {
 		 	clickedUser();
+		 	Session.set(this._id, 'voted')
 			Contests.update(this._id, {
 			$inc: {vote2_count: 1}   
 			});
 	//		Users.update( Meteor.userId {
 	//			$push {votedOn: this._id} );
 
-			}
+	 		}//end else
+
+			} //end click .vote func
 		});
 	
 
