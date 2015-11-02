@@ -19,6 +19,7 @@ h1 {
 	
 	width:500px;
 	height:auto;
+  max-height:500px;
 	padding: 10px 15px 10px 15px;
 	
 	float: left;
@@ -28,7 +29,8 @@ h1 {
 margin:30px 0 30px 15px;
     width: 1200px;
 	display: block;
-  height: auto;
+  /* height: auto; */
+  height: 600px;
   overflow: auto;
   border-radius: 30px;
   border: 2px solid #09093B;
@@ -39,7 +41,7 @@ margin:30px 0 30px 15px;
 
 .btn {
 		margin: auto;
-		
+		margin-bottom: 10px;
 		display: block;
 		
 		
