@@ -197,15 +197,23 @@ var userCanCreateContest = function() {
 	var votesParsed = JSON.parse(JSON.stringify(numOfVotesRow));
 	console.log(votesParsed);
 
-	//var votes = votesParsed.votedCount;
+	//var vots = votesParsed.votedCount;
+	try {
 	var votes = votesParsed[0].votedCount;
+}
+catch (err)
+{ console.log(err);
+	var votes = 0;
+	
+}
 
 	console.log("votes value: " + votes);
 	if (votes >= 5)
 	{
 		return true;
 	}
-	else return false;
+	//else return false;
+	return true;
 
 
 };
