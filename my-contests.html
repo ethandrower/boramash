@@ -30,28 +30,31 @@
   
   </div>
 	
-</div>	
+</div>
+
+<div style="margin-top:20px; width:1170px; border-top: 2px solid #000000;">© 2015 BorAmach Co. </div>	
+
 </template>
 
 
 <template name="userContest">
 
+<h3><div class="user-contest-status-value">{{contestName}}</div></h3>
 <div class="contest-row" >
 
 	<!-- <div class="userContestPreview"> -->
-
-	<div class="entry">
-		<img class="entry" src="/cfs/files/images/{{entry1}}">
-		
-		<span class="btn"> <button type="button" class="vote1 btn">Vote Count ({{vote1_count}})</button>  </span>
-		
-	</div>
+	
+		<div class="entry">
+            <img class="entry" src="/cfs/files/images/{{entry1}}" style="width:60%;">
+            <div style="clear:both;"></div>
+            <span class="btn"> <button type="button" class="vote1 btn">Vote Count ({{vote1_count}})</button>  </span>
+		</div>
 	
 	<div class="entry">
-			<img class="entry" src="/cfs/files/images/{{entry2}}">
+			<img class="entry" src="/cfs/files/images/{{entry2}}" style="width:60%;">
+            <div style="clear:both;"></div>
 			<button type="button" class="btn vote2 button-clear">Vote Count ({{vote2_count}})</button> 
 	</div>
-
 	<!-- 	</div> -->
 
 	<div class="userContestControls">
@@ -81,7 +84,7 @@
 
 	</div>
 </div>
+<div></div>
 	
 </template>
 
-	

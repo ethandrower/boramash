@@ -1,27 +1,25 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+
 @charset "UTF-8";
 /* CSS declarations go here */
 
 
 
 body {
-  margin: 0px;
-  background: #f9f9f9;
-}
+  font-family: 'Lato', sans-serif;
+  width: 1170px;
+  margin-top:30px;
+  margin-left: auto;
+  margin-right: auto;
 
+}
 h1 {
   color: black;
 
 }
 
-.login-buttons { 
-  color: black;
-  right: 10px;
-  position: absolute;
-  top: 11px;
-  font-size: 18px;
-  width: 255px;  
-}
+.login-buttons { float:left; text-align:center; width:340px; border-bottom: 2px solid #000000; padding: 8px 5px 9px 5px; height: 33px;}
 
 #login-buttons{
   width: 100%;
@@ -40,21 +38,54 @@ h1 {
 }
 
 .entry {
-	
-	width:500px;
+	width:40%;
 	height:auto;
-  max-height:500px;
+    max-height:500px;
 	padding: 10px 15px 10px 15px;
+	text-align:center;
+	float: left;
 	
+}
+.entry-stream {
+	width:90%;
+	height:auto;
+    max-height:500px;
+	padding: 10px 15px 10px 15px;
+	text-align:center;
 	float: left;
 	
 }
 .contest-row {
   margin:30px 0 30px 15px;
-  width: 1200px;
+  width: 1120px;
 	display: block;
   /* height: auto; */
-  height: 600px;
+  height: auto;
+  overflow: auto;
+  border-radius: 30px;
+
+  position: relative;
+  display: block;
+  margin: 0px auto;
+  background: transparent;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  padding: 20px 20px 0px 20px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-clip: padding-box;
+  background-color: #fff;
+  margin-bottom: 15px;
+}
+
+.contest-row-stream {
+  margin-top: 20px;
+  width: 1120px;
+	display: block;
+  /* height: auto; */
+  height: auto;
   overflow: auto;
   border-radius: 30px;
 
@@ -178,16 +209,23 @@ h1 {
   border: 0;
   line-height: 1;
   font-family: 'Lato', sans-serif;
+  color:#666666;
 }
 #cssmenu {
-  width: auto;
-  background-color: rgba(0,0,0,0.1);
-  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.5);
-
+  border-bottom: 2px solid #000000;
+  width: 800px;
+  float:left;
+  height:50px;
+  margin-right:10px;
 }
 #cssmenu ul {
   zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@top-color', endColorstr='@bottom-color', GradientType=0);
+  /*
+  background: #36b0b6;  
+  */
+  color:#FF0004;
+  background: #ffffff;
+  padding: 5px 10px;
 }
 #cssmenu ul:before {
   content: '';
@@ -201,25 +239,16 @@ h1 {
 #cssmenu li {
   float: left;
   margin: 0 5px 0 0;
-  color: rgba(0,0,0,0.7);
--webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;  
-  padding: 5px 0px;
+  border: 1px solid transparent;
+  
 }
 #cssmenu li a {
--webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;  
   padding: 8px 15px 9px 15px;
   display: block;
-  text-decoration: none !important;
+  text-decoration: none;
+  color:#666666;
   border: 1px solid transparent;
-  color: rgba(0,0,0,0.5);
-  font-weight: bold;
-  font-style: normal;
+  font-size: 16px;
 }
 
 #login-buttons a, .accounts-dialog a{
@@ -248,11 +277,12 @@ h1 {
 }
 
 .sub-container{
-  padding: 5px 8px;
+  margin-top: 20px;
 }
 
 .add-content-box .add-content-area{
-    width: 70%;
+	font-family: 'Lato', sans-serif;
+	width: 70%;
     position: relative;
     display: block;
     margin: 0px auto;
@@ -413,6 +443,28 @@ h1 {
 
 .contest-row .btn button.vote1,.contest-row button.vote2{
     background-color: #e1e1e1;
+    position: relative;
+    cursor: pointer;
+    will-change: opacity, transform;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-clip: padding-box;
+    border: none;
+    webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    padding: 10px 25px;
+}
+
+.contest-row-stream .btn button.vote1,.contest-row-stream button.vote2{
+    margin-top:10px;
+	background-color: #e1e1e1;
     position: relative;
     cursor: pointer;
     will-change: opacity, transform;

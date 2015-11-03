@@ -56,7 +56,8 @@ if (Meteor.isClient) {
     autoScroll: true
   });
 
- 
+
+
 Template.contests.helpers({
 	contests: function () { 
 		console.log("in contests");

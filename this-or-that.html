@@ -4,12 +4,22 @@
 </head>
 
 <body>
-	<div class="login-buttons">
-	   {{> loginButtons}}
-	</div>
+	<img src="header-logo.png" width="1170" height="150" alt=""/>
+<div id='cssmenu'>
+  <ul>
+   <li><a href='/'><span><i class="fa fa-home"></i> Home</span></a></li>
+   <li><a href='/mycontests'><span><i class="fa fa-files-o"></i> My Contests</span></a></li>
+   <li><a href='/addcontest'><span><i class="fa fa-calendar-plus-o"></i> Add A Contest</span></a></li>
+   <li class='last'><a href='#'><span><i class="fa fa-envelope"></i> Contact</span></a></li>
+</ul>
+</div>
+<div class="login-buttons">
+   {{> loginButtons}}
+</div>
+<div style="clear:both;"></div>
+	<div class="container-main">
+    
    {{> flashMessages}}
-  
-  <h1 class="main-title">Website Comparisons</h1>
 
   
 
@@ -26,7 +36,7 @@
   
   </div>
   
-  
+  </div>
 </body>
 
 <!-- 
@@ -64,6 +74,7 @@
   
  <!--  </div>  -->
 </div>	
+<div style="margin-top:20px; width:1170px; border-top: 2px solid #000000;">© 2015 BorAmash Co. </div>
 	</template>  
 
 
@@ -72,25 +83,25 @@
 <template name="contest">
 	<!-- <iframe class="link-preview" src="{{entry1}}" sandbox='' allowscripts="no" scrolling="no"></iframe>   -->
 <div class="sub-container">
-<div class="contest-row">
-	<div class="submittedBy"> Submitted by <b>{{userName}}</b>	 </div>
-
-	<span class="entry">
-
-		<img class="entry" src="/cfs/files/images/{{entry1}}">
-
-		<span class="btn"> <button type="button" class="vote1 btn">Vote for #1  ({{vote1_count}})</button>  </span>
-		
-
-		
-	</span>
-	
-	<span class="entry">
-			<img class="entry" src="/cfs/files/images/{{entry2}}">
-			<button type="button" class="btn vote2 button-clear">Vote for #2  ({{vote2_count}})</button> 
-	</span>
+<div class="contest-row-stream">
+	<div class="submittedBy"> <i class="fa fa-user"></i> Submitted by <b>{{userName}}</b>	 </div>
+    
+    <div style="width:35%; text-align:center; float:left; margin-left:10%; margin-right:10%;">
+        <div class="entry-stream">
+            <img class="entry-stream" src="/cfs/files/images/{{entry1}}">
+            <div style="clear:both;"></div>
+            <span class="btn"> <button type="button" class="vote1 btn">Vote for #1  ({{vote1_count}})</button>  </span>
+        </div>
+    </div>
+	<div style="width:35%; text-align:center; float:left; margin-right:10%;">
+        <div class="entry-stream">
+                <img class="entry-stream" src="/cfs/files/images/{{entry2}}">
+                <div style="clear:both;"></div>
+                <button type="button" class="btn vote2 button-clear">Vote for #2  ({{vote2_count}})</button> 
+        </div>
+    </div>
 <div>
-	
+<div style="clear:both;"></div>	
 </div>
 	
 </div></div>
