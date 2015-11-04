@@ -2,6 +2,8 @@
 
 Contests = new Mongo.Collection("Contests");
 UserAccounts = new Mongo.Collection('Users');
+AdminAccounts = new Mongo.Collection('AdminAccounts');
+
 UserVoted = new Mongo.Collection('UserVoted');
 
 ImageStore = new FS.Store.FileSystem("images", {
@@ -76,7 +78,65 @@ Template.contests.helpers({
 	 }
 	 
  });
+
+
+
+//need to manually add myself as user
+var checkIfAdmin = function(userId) {
+
+	var getUser = AdminAccounts.findOne({"_id": userId});
+	//console.log("num votes row returned" + numOfVotesRow);
+	//console.log(JSON.stringify(numOfVotesRow, null, 2));
+	console.log("get user " + getUser);
+
+if(getUser)
+	{return true;}
+
+else {return false};
+
+
+
+}
+
+
+ Template.admincontests.helpers({
+ 	myContests: function () {
+ 		var currentUserId = Meteor.userId();
+
+ 		if (checkIfAdmin(currentUserId)){
+ 			console.log("user is admin");
+ 			return Contests.find({});
+ 		}
+
+ 	}
+
+
+ });
+
+Template.admincontests.events({
+"click .userContestControlButton_Pause": function () {
+
+	// logic for pausing here
+	var doc = Contests.findOne({contestId: this.contestId});
+	
+	Contests.update(this.contestId, {$set: {isActive: !doc.isActive}}, {upsert: true});
+
+},
+"click .userContestControlButton_Delete": function () {
+
+	// find ID of contest.
+	//delete contest.
+
+	Contests.remove(this.contestId);
+	console.log("in remove clause");
+
+}
+
+});
  
+
+
+
 
 Template.mycontests.events({
 "click .userContestControlButton_Pause": function () {
@@ -298,7 +358,7 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
  
 Router.route('/addcontest');
 Router.route('/mycontests');
-
+Router.route('/admincontests');
 Router.route('/', function () { this.render('contests') ; });
 
 

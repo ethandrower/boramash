@@ -1,0 +1,89 @@
+<head>
+  <title>this-or-that</title>
+
+</head>
+
+<body>
+
+  
+</body>
+
+
+
+
+
+<template name="admincontests">
+<div class="sub-container">
+ <h1>My Contests</h1>
+
+
+  <div class="container">
+<!-- <a href="/addcontest">Add a new contest here</a> -->
+
+
+ 
+  
+	{{#each myContests}} 
+	{{> userContestAdmin}}
+	{{/each}} 
+  
+  
+  </div>
+	
+</div>
+
+<div style="margin-top:20px; width:1170px; border-top: 2px solid #000000;">© 2015 BorAmach Co. </div>	
+
+</template>
+
+
+<template name="userContestAdmin">
+
+<h3><div class="user-contest-status-value">{{contestName}}</div></h3>
+<div class="contest-row" >
+
+	<!-- <div class="userContestPreview"> -->
+	
+		<div class="entry">
+            <img class="entry" src="/cfs/files/images/{{entry1}}" style="width:60%;">
+            <div style="clear:both;"></div>
+            <span class="btn"> <button type="button" class="vote1 btn">Vote Count ({{vote1_count}})</button>  </span>
+		</div>
+	
+	<div class="entry">
+			<img class="entry" src="/cfs/files/images/{{entry2}}" style="width:60%;">
+            <div style="clear:both;"></div>
+			<button type="button" class="btn vote2 button-clear">Vote Count ({{vote2_count}})</button> 
+	</div>
+	<!-- 	</div> -->
+
+	<div class="userContestControls">
+		<ul>
+			<li><button type="button" class="userContestControlButton_Pause"> Pause </button> </li>
+			<li><button type="button" class="userContestControlButton_Delete"> Delete </button></li>
+		<div class="userContestInfo">
+			<li>
+				<div><b>Contest Name:</b></div>
+				<div class="user-contest-status-value">{{contestName}}</div>
+			</li>
+			<li>
+				<div><b>Description:</b></div>
+				<div class="user-contest-status-value">{{contestDescription}} </div>
+			</li>
+		</div>
+
+		</ul>
+
+	<div class="userContestStatus">
+		{{#if isActive}}
+		<b>Status:</b><span class="user-contest-status-value"> Active</span>
+		{{else}}
+		<b>Status:</b><span class="user-contest-status-value"> Paused</span>
+		{{/if}}
+	</div>
+
+	</div>
+</div>
+<div></div>
+	
+</template>
