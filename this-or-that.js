@@ -1,5 +1,10 @@
 
 
+/* Data Collection Definitions
+These allow mongoDB collections to be accessible through object vars calls
+*/
+
+
 Contests = new Mongo.Collection("Contests");
 UserAccounts = new Mongo.Collection('Users');
 AdminAccounts = new Mongo.Collection('AdminAccounts');
@@ -11,12 +16,12 @@ ImageStore = new FS.Store.FileSystem("images", {
 
 });
 
-
+//Definition of images collection
 Images = new FS.Collection("images", {
 
 	filter: {
 		maxSize: 1048576,
-		allow: {
+		allow: { //Restrictions for file uploads are here
 			contentTypes: ['image/*'],
 			extensions: ['png', 'jpg']
 		}
@@ -28,10 +33,10 @@ Images = new FS.Collection("images", {
 });
 
 
-if (Meteor.isServer)
+if (Meteor.isServer)  //All server code is within this definition
 {
 
-	Images.allow({
+	Images.allow({   //Permisions to the image collection
 	 insert: function(){
 	 return true;
 	 },
@@ -49,8 +54,9 @@ if (Meteor.isServer)
 
 }
 
-if (Meteor.isClient) {
+if (Meteor.isClient) { //All code that runs on client is within this definition
 
+//Parameters for the flash notification messages here
 
 	FlashMessages.configure({
     autoHide: false,
@@ -60,14 +66,16 @@ if (Meteor.isClient) {
 
 
 
+//Home page event handler,  retrieves all active (unpaused) contests
 Template.contests.helpers({
 	contests: function () { 
-		console.log("in contests");
+		
 		return Contests.find({isActive: true}) ;
 	}
 	
 });
   
+  //Handler to display logged in user's contests
  Template.mycontests.helpers({
 	 myContests: function () {
 		 var currentUserId = Meteor.userId();
@@ -81,7 +89,7 @@ Template.contests.helpers({
 
 
 
-//need to manually add myself as user
+//Helper function to verify that signed in user is in admin collection
 var checkIfAdmin = function(userId) {
 
 	var getUser = AdminAccounts.findOne({"_id": userId});
@@ -98,7 +106,7 @@ else {return false};
 
 }
 
-
+//Event handler for displaying all contests on /admincontests view
  Template.admincontests.helpers({
  	myContests: function () {
  		var currentUserId = Meteor.userId();
@@ -113,6 +121,8 @@ else {return false};
 
  });
 
+
+//FUnctionality for pause/delete buttons on admin 
 Template.admincontests.events({
 "click .userContestControlButton_Pause": function () {
 
@@ -136,7 +146,7 @@ Template.admincontests.events({
  
 
 
-
+//Button functionality delete/pause for  regular user mycontests page
 
 Template.mycontests.events({
 "click .userContestControlButton_Pause": function () {
@@ -250,10 +260,13 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
 };
 
 
+//Form Submission Handler for uploading/creating a new contest
  Template.addcontest.events({
 	 	"submit form" : function(event, template){
 	 	if (!userCanCreateContest())
 	 	{
+	 		//Call helper function to make sure user can create
+	 		//Send message notifying user if they can't create contest
 	 		FlashMessages.sendWarning("Contest Could not be added, you must vote in 5 contests before creating your own!", {autoHide: false});
 	 		return false;
 	 	}
@@ -262,20 +275,20 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
 
 	 		 event.preventDefault(); 
 	 		var firstImage = true;
-	 		var contestId = Random.id(5);
+	 		var contestId = Random.id(25);  //generate a random id for the contest
 	 		
-	 		var curUser = Meteor.userId();
-	 		
+	 		var curUser = Meteor.userId();  //get current user  ID
+	 		var currentUserId = Meteor.user().username;    //get current user name
+
 	 		
 	 	
-
-	 		var subContestName = event.target.contestName.value;
+	 		//pull text fields from form and stuff into vars
+	 		var subContestName = event.target.contestName.value;  
 	 		var subContestDescrip = event.target.descrip.value;
 
 	 		
 
-	 		var currentUserId = Meteor.user().username;
-
+	 		
 	 		
 
 	 		 var file = template.findAll('input:file');
@@ -289,7 +302,7 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
 				for (x=0; x < file.length; x++)
 			{
 				console.log("x = " + x);
-
+				//CFS file package insert call here
 	 			Images.insert(file[x].files[0], function (err, fileObj) {
 	 				if (err){
 	 					console.log("error on file upload! " + err);
@@ -302,7 +315,7 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
 	 					//file upload was a success!!
 	 					
 
-	 				if(firstImage)
+	 				if(firstImage)  //check if we are in first or second loop
 	 				{
 	 					var event1 = event.target.event1.value;
 						
@@ -334,7 +347,7 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
 	 				
 	 		
 	 	 //});
-		if(!errorOccurred)
+		if(!errorOccurred)  //Error handling, send notification.
 		{
 	 	FlashMessages.sendWarning("Contest Added!");
 	 }
@@ -355,6 +368,8 @@ catch (err) //If user has not voted yet, will throw exception, so just set that 
  
  }// close server code conditional
  
+
+ //Routes are below,  the name of the route dynamically calls the event handler (with same name) if a browser requests the route
  
 Router.route('/addcontest');
 Router.route('/mycontests');
